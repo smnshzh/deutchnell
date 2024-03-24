@@ -8,7 +8,7 @@ const SignUpForm = () => {
     confirmPassword: '',
   });
 
-  const handleChange = (e) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
       ...prevData,
@@ -16,7 +16,7 @@ const SignUpForm = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
     // Handle form submission here, such as sending data to an API
     console.log('Form submitted:', formData);
