@@ -7,21 +7,23 @@ function ExcelDataViewer() {
     const [data, setData] = useState(null);
 
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const file = e.target.files[0];
-        const reader = new FileReader();
-    
-        reader.onload = (event) => {
-            const workbook = XLSX.read(event.target.result, { type: 'binary' });
-            const firstSheetName = workbook.SheetNames[0];
-            const worksheet = workbook.Sheets[firstSheetName];
-            const parsedData = XLSX.utils.sheet_to_json(worksheet, { header: 0 });
-            setData(parsedData);
-            console.log(parsedData);
-        };
-    
-        reader.readAsBinaryString(file);
+        const file = e.target.files && e.target.files[0]; // Add a null check here
+        if (file) {
+            const reader = new FileReader();
+            
+            reader.onload = (event) => {
+                const workbook = XLSX.read(event.target.result, { type: 'binary' });
+                const firstSheetName = workbook.SheetNames[0];
+                const worksheet = workbook.Sheets[firstSheetName];
+                const parsedData = XLSX.utils.sheet_to_json(worksheet, { header: 0 });
+                setData(parsedData);
+                console.log(parsedData);
+            };
+            
+            reader.readAsText(file);
+        }
     };
-
+    
    
     const columns = data && Object.keys(data[0]).map((header) => ({ name: header, selector: header }));
 
