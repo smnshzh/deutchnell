@@ -6,10 +6,10 @@ import TableComponent from './Table';
 function ExcelDataViewer() {
     const [data, setData] = useState(null);
 
-    const handleFileChange = (e) => {
+    const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files[0];
         const reader = new FileReader();
-
+    
         reader.onload = (event) => {
             const workbook = XLSX.read(event.target.result, { type: 'binary' });
             const firstSheetName = workbook.SheetNames[0];
@@ -18,6 +18,9 @@ function ExcelDataViewer() {
             setData(parsedData);
             console.log(parsedData);
         };
+    
+        reader.readAsBinaryString(file);
+    };
 
         reader.readAsBinaryString(file);
     };
