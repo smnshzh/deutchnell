@@ -8,7 +8,7 @@ const SignUpForm = () => {
     confirmPassword: '',
   });
 
-  const handleChange = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
       ...prevData,
