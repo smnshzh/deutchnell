@@ -1,6 +1,11 @@
 import { useState } from 'react';
 
-const TableComponent = ({ data, showBorder = true }) => {
+interface TableComponentProps {
+  data: { [key: string]: any }[]; // Define data as an array of objects with string keys and any values
+  showBorder?: boolean;
+}
+
+const TableComponent = ({ data, showBorder = true }: TableComponentProps) => {
   const [searchTerm, setSearchTerm] = useState('');
 
   const filteredData = data.filter(row =>
