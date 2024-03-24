@@ -22,8 +22,7 @@ function ExcelDataViewer() {
         reader.readAsBinaryString(file);
     };
 
-        reader.readAsBinaryString(file);
-    };
+   
     const columns = data && Object.keys(data[0]).map((header) => ({ name: header, selector: header }));
 
     return (
