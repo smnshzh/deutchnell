@@ -1,9 +1,18 @@
 import React, { useState } from 'react';
 
-function TableWithSearch({ data }) {
+// Define an interface for the type of data
+interface TableData {
+    [key: string]: string | number; // Define the types of values for each key
+}
+
+interface TableWithSearchProps {
+    data: TableData[]; // Specify that data should be an array of objects with string or number values
+}
+
+function TableWithSearch({ data }: TableWithSearchProps) {
     const [searchTerm, setSearchTerm] = useState('');
-    
-    const handleChange = (e) => {
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setSearchTerm(e.target.value);
     };
 
