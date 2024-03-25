@@ -1,5 +1,6 @@
 'use client '
 import React, { useState } from 'react';
+import { useClient } from 'next/client'; // Import useClient hook
 import * as XLSX from 'xlsx';
 import TableComponent from './Table';
 
@@ -8,6 +9,9 @@ type ParsedData = Record<string, any>[];
 
 function ExcelDataViewer() {
     const [data, setData] = useState<ParsedData | null>(null);
+
+    // Mark the component as a Client Component
+    useClient();
 
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files && e.target.files[0]; // Add a null check here
