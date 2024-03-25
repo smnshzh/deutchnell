@@ -20,11 +20,8 @@ function ExcelDataViewer() {
                     const worksheet = workbook.Sheets[firstSheetName];
                     type ParsedData = Record<string, any>[];
                     const parsedData: ParsedData = XLSX.utils.sheet_to_json(worksheet, { header: 0 });
-
-                    if(parsedData){
-                    setData(parsedData);}
                     
-                }
+                    setData(parsedData);
             };
             
             reader.readAsText(file);
