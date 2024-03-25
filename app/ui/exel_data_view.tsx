@@ -1,35 +1,37 @@
-"use client"
 import React, { useState } from 'react';
 import * as XLSX from 'xlsx';
-import DataTable from 'react-data-table-component';
 import TableComponent from './Table';
 
+// Define type outside of the component
+type ParsedData = Record<string, any>[];
 
 function ExcelDataViewer() {
-    const [data, setData] = useState(null);
+    const [data, setData] = useState<ParsedData | null>(null);
 
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files && e.target.files[0]; // Add a null check here
         if (file) {
             const reader = new FileReader();
-            
+
             reader.onload = (event) => {
-                if (event.target) {  
-                    const workbook = XLSX.read(event.target.result);
-                    const firstSheetName = workbook.SheetNames[0];
-                    const worksheet = workbook.Sheets[firstSheetName];
-                    type ParsedData = Record<string, any>[];
-                    const parsedData: ParsedData = XLSX.utils.sheet_to_json(worksheet, { header: 0 });
-                    
-                    setData(parsedData);
+                if (event.target) {
+                    const fileReader = event.target as FileReader;
+                    const result = fileReader.result;
+                    if (result && typeof result === 'string') {
+                        const workbook = XLSX.read(result, { type: 'binary' });
+                        const firstSheetName = workbook.SheetNames[0];
+                        const worksheet = workbook.Sheets[firstSheetName];
+                        const parsedData: ParsedData = XLSX.utils.sheet_to_json(worksheet, { header: 0 });
+                        
+                        setData(parsedData);
+                    }
+                }
             };
-            
-            reader.readAsText(file);
+
+            reader.readAsBinaryString(file);
         }
     };
-    
-    
-   
+
     const columns = data && Object.keys(data[0]).map((header) => ({ name: header, selector: header }));
 
     return (
@@ -40,9 +42,8 @@ function ExcelDataViewer() {
                     <>
                         <h2 className="text-xl font-bold mb-4">Excel Data:</h2>
                         <TableComponent
-                            
                             data={data}
-                           
+                            columns={columns}
                         />
                     </>
                 )}
@@ -50,7 +51,5 @@ function ExcelDataViewer() {
         </div>
     );
 }
-
-
 
 export default ExcelDataViewer;
