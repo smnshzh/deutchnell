@@ -42,9 +42,9 @@ function ExcelDataViewer() {
                 {data && (
                     <>
                         <h2 className="text-xl font-bold mb-4">Excel Data:</h2>
-                        <TableComponent
+                        <TableComponent()
                             data={data}
-                            columns={columns}
+                            columns ={columns}
                         />
                     </>
                 )}

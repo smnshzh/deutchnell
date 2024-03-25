@@ -3,6 +3,7 @@ import { useState } from 'react';
 interface TableComponentProps {
   data: { [key: string]: any }[]; // Define data as an array of objects with string keys and any values
   showBorder?: boolean;
+  columns: { name: string; selector: string; }[] | null; 
 }
 
 const TableComponent = ({ data, showBorder = true }: TableComponentProps) => {
