@@ -3,6 +3,8 @@ import React, { useState } from 'react';
 import * as XLSX from 'xlsx';
 import DataTable from 'react-data-table-component';
 import TableComponent from './Table';
+
+
 function ExcelDataViewer() {
     const [data, setData] = useState(null);
 
@@ -12,17 +14,12 @@ function ExcelDataViewer() {
             const reader = new FileReader();
             
             reader.onload = (event) => {
-                if (event.target) {
-                    interface ExcelData {
-                        id: number;
-                        name: string;
-                        age: number;
-                      }
-                      
+                if (event.target) {  
                     const workbook = XLSX.read(event.target.result);
                     const firstSheetName = workbook.SheetNames[0];
                     const worksheet = workbook.Sheets[firstSheetName];
-                    const parsedData: ExcelData[] = XLSX.utils.sheet_to_json(worksheet, { header: 0 });
+                    type ParsedData = Record<string, any>[];
+                    const parsedData: ParsedData = XLSX.utils.sheet_to_json(worksheet, { header: 0 });
 
                     if(parsedData){
                     setData(parsedData);}
