@@ -16,6 +16,7 @@ const TableComponent = ({ data, showBorder = true }: TableComponentProps) => {
   );
 
   return (
+    
     <div className="overflow-x-autow-full">
       <input
         type="text"
