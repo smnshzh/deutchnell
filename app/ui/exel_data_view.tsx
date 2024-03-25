@@ -17,8 +17,9 @@ function ExcelDataViewer() {
                     const firstSheetName = workbook.SheetNames[0];
                     const worksheet = workbook.Sheets[firstSheetName];
                     const parsedData = XLSX.utils.sheet_to_json(worksheet, { header: 0 });
-                    setData(parsedData);
-                    console.log(parsedData);
+                    if(parsedData){
+                    setData(parsedData);}
+                    
                 }
             };
             
