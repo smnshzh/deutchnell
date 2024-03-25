@@ -13,7 +13,7 @@ function ExcelDataViewer() {
             
             reader.onload = (event) => {
                 if (event.target) {
-                    const workbook = XLSX.read(event.target.result, { type: 'binary' });
+                    const workbook = XLSX.read(event.target.result);
                     const firstSheetName = workbook.SheetNames[0];
                     const worksheet = workbook.Sheets[firstSheetName];
                     const parsedData = XLSX.utils.sheet_to_json(worksheet, { header: 0 });
