@@ -11,8 +11,8 @@ export default function Page() {
           className="block md:hidden"
           src="/1710737521Bear21a.svg"
           alt="mobile"
-          width={620}
-          height={497}/>
+          width={50}
+          height={50}/>
     <Image 
      className="hidden md:block"
     src="/fighter.jpg" 
