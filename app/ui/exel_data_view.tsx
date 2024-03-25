@@ -12,17 +12,20 @@ function ExcelDataViewer() {
             const reader = new FileReader();
             
             reader.onload = (event) => {
-                const workbook = XLSX.read(event.target.result, { type: 'binary' });
-                const firstSheetName = workbook.SheetNames[0];
-                const worksheet = workbook.Sheets[firstSheetName];
-                const parsedData = XLSX.utils.sheet_to_json(worksheet, { header: 0 });
-                setData(parsedData);
-                console.log(parsedData);
+                if (event.target) {
+                    const workbook = XLSX.read(event.target.result, { type: 'binary' });
+                    const firstSheetName = workbook.SheetNames[0];
+                    const worksheet = workbook.Sheets[firstSheetName];
+                    const parsedData = XLSX.utils.sheet_to_json(worksheet, { header: 0 });
+                    setData(parsedData);
+                    console.log(parsedData);
+                }
             };
             
             reader.readAsText(file);
         }
     };
+    
     
    
     const columns = data && Object.keys(data[0]).map((header) => ({ name: header, selector: header }));
